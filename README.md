@@ -1,6 +1,6 @@
 # 📊 Monitoramento de Semáforos: Via Única e Cruzamento Duplo
 
-Este projeto consiste em uma análise comparativa e de desempenho (Benchmark) entre dois sistemas de sinalização viária automatizados para Arduino. O objetivo é avaliar a eficiência lógica, o consumo de recursos de hardware (I/O) e o comportamento do barramento de dados ao escalar a complexidade do circuito.
+Este projeto consiste em uma análise comparativa entre dois sistemas de sinalização viária automatizados para Arduino. O objetivo é avaliar a eficiência lógica, o consumo de recursos de hardware (I/O) e o comportamento do barramento de dados ao escalar a complexidade do circuito.
 
 ---
 
@@ -63,20 +63,10 @@ Dependendo de qual firmware for carregado no microcontrolador, a distribuição 
 
 ---
 
-## 📊 Estrutura e Métricas do Benchmark
+## 📊 Estrutura e Métricas dos Cenários
 
 ### Análise Lógica do Firmware
-Ambos os programas utilizam funções exclusivas chamadas `semaforo()` para isolar a máquina de estados do laço principal `loop()`. A grande diferença de performance está na temporização fixa e no bloqueio por processamento síncrono (Busy-Wait):
+Ambos os programas utilizam funções exclusivas chamadas `semaforo()` para isolar a máquina de estados do laço principal `loop()`. A diferença prática está na temporização fixa e na duração de cada etapa do processamento síncrono:
 
 * **Métrica de Ciclo (Cenário 1):** Possui tempo total de retenção de **5.000 ms** (5 segundos) por ciclo completo, divididos entre os três LEDs em uma estrutura linear simples.
-* **Métrica de Ciclo (Cenário 2):** Eleva o tempo total de retenção para **12.000 ms** (12 segundos), gerenciando 4 estados lógicos de forma cruzada para manter o tráfego seguro.
-
-### Comportamento do Barramento Serial
-Os códigos testam duas abordagens de transmissão de dados via UART:
-
-O **Cenário 1** faz uso de `Serial.println()`, transmitindo caracteres seguidos de quebras de linha automáticas (`\r\n`), o que gera um formato de log vertical limpo:
-
-```text
-SEMÁFORO VERDE
-SEMÁFORO AMARELO
-SEMÁFORO VERMELHO
+* **Métrica de Ciclo (Cenário 2
